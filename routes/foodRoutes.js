@@ -5,7 +5,6 @@ const {
   removeFood,
 } = require("../controllers/foodController"); // Import food controller functions
 const multer = require("multer"); // Middleware for handling file uploads
-const authMiddleware = require("../config/authMiddleware"); // Middleware to protect routes (optional here)
 
 const router = express.Router(); // Create an Express router instance
 
@@ -23,15 +22,15 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Route to add a new food item (with image upload)
-router.post("/add",authMiddleware, upload.single("image"), addFood); 
+router.post("/add", upload.single("image"), addFood); 
 // Example: POST request to localhost:4000/food/add
 
 // Route to get the list of all food items
-router.get("/list",authMiddleware, listFood); 
+router.get("/list", listFood); 
 // Example: GET request to localhost:4000/food/list
 
 // Route to remove a food item by ID
-router.post("/remove",authMiddleware, removeFood); 
+router.post("/remove", removeFood); 
 // Example: POST request to localhost:4000/food/remove
 
 // Export the router to be used in the main app
