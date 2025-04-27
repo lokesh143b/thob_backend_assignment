@@ -16,12 +16,13 @@ const authMiddleware = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Store the user ID from token payload in the request body for use in the next middleware or route
-    req.body.userId = decoded.id;
+    req.userId = decoded.id;
 
     // Call the next middleware or route handler
     next();
   } catch (error) {
     // If token verification fails, return an error response
+   
     res.json({ success: false, message: "Invalid Token" });
   }
 };
